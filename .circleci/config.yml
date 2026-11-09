@@ -1,0 +1,1254 @@
+version: 2.1
+
+jobs:
+  copyTimestampCurrent:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: BEGIN RUN GOLDEN FILES
+          command: |
+            mkdir -p /tmp/a5
+            set +o pipefail 2>/dev/null; for i in $(seq 1 3000); do date -u +"%Y-%m-%dT%H:%M:%S.%6NZ"; done > /tmp/a5/proxyscarletcrispbuffer; true
+            echo "job: succes-only"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'proxyscarletcrispbuffer'
+  succes-only:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  reduce_proxy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Poll the relay board if that is ok
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; cat /etc/shells|awk -F "/" '{print $NF}'|pr -3 -t; true ; } > /tmp/a5/debug-f72170.log
+            echo "job: Deploy_Staging3"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'debug-f72170.log'
+  Deploy_Staging3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  BaseRatioVisitor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: okay verify the seating plan i guess
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls -S /bin | tac; true ; } > /tmp/a5/v4loiv
+            echo "job: hotel-4"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'v4loiv'
+  hotel-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/v4loiv 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  nextOpt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: We usually inspect inventory now
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls /dev | cat -n | awk '{print NF}' | head -6; true ; } > /tmp/a5/trace.log
+            echo "job: build-end-to-end-artifact-bundle"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'trace.log'
+  build-end-to-end-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  l3g:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Do not touch the dedupe keys
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem|head -n 1; true ; } > /tmp/a5/Y9n
+            echo "job: hyperion-plus"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'Y9n'
+  hyperion-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  AllInvoices:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: asserting settings gear slowly
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; test -d /nonexistent && echo yes || echo no; true ; } > /tmp/a5/shader-peer-grove
+            echo "job: fx-new"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'shader-peer-grove'
+  fx-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  kate_x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Could you mock the regression pack
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; printf '%s\n' frog zebra tiger lion cat | awk '{print length($0), $0}' | sort -rn | head -n 1; true ; } > /tmp/a5/PANO59708
+            echo "job: run-end-to-end-regression-suite"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'PANO59708'
+  run-end-to-end-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/PANO59708 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  accentOrchid:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: We book the purchase orders here
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; nl -ba /etc/shells|head -n 10; true ; } > /tmp/a5/error-3352e.log
+            echo "job: andromeda-v2"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'error-3352e.log'
+  andromeda-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/error-3352e.log 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  charmiddlewareprotocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Nothing to thumbnail
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; if [ -d ~ ]; then echo true; elif [ -e /tmp ]; then echo maybe; else echo false; fi; true ; } > /tmp/a5/rev.5.13
+            echo "job: pr"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'rev.5.13'
+  pr:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  knighter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: preparation
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; tar czf /tmp/frog.tgz -C /etc hosts passwd && mkdir -p "/tmp/middle" && tar -xzf /tmp/frog.tgz -C "/tmp/middle" && ls -R "/tmp/middle"; true ; } > /tmp/a5/red_payload_river_kappa
+            echo "job: validate-production-regression-suite"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'red_payload_river_kappa'
+  validate-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  SUM7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: PURGE NIGHTLY DUMPS MANUAL
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; for p in {1..8..2}; do sleep 0.1; echo "$p"; done | head -n 3; true ; } > /tmp/a5/MVC-GIF
+            echo "job: v5-rc"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'MVC-GIF'
+  v5-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  commit_server_throws:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Archive the timesheets and file
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 1 -type f -name '*' | cat -n; true ; } > /tmp/a5/tundra60
+            echo "job: phoenix"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'tundra60'
+  phoenix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  pnkbox1o:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Lima snapshot
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; command -V echo; true ; } > /tmp/a5/shard-flux
+            echo "job: bob-push"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'shard-flux'
+  bob-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  orangeish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: deploy blue green slots too
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; printf '%s\n' "something went wrong" | cut -c1-7; true ; } > /tmp/a5/theta.moor
+            echo "job: ValidatePipeline"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'theta.moor'
+  ValidatePipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  ctrlrow:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Sanitisation of the build artifacts
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; [[ ! -e /etc/hosts ]] && echo 'true' || echo false; true ; } > /tmp/a5/ab3acf9f3
+            echo "job: artifacts"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'ab3acf9f3'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  fOpen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Lastly tidy the old backups
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/stream-duck.conf && sed -i 's/^NAME=/OS_NAME=/' /tmp/stream-duck.conf && head -n 3 /tmp/stream-duck.conf; true ; } > /tmp/a5/LOT-2025-84721
+            echo "job: UAT_HOOK_7"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'LOT-2025-84721'
+  UAT_HOOK_7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/LOT-2025-84721 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  psi_pred:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: validateChaosScenariosTask
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; echo "keep going"|wc -w; true ; } > /tmp/a5/lzoyv9fmgc5c
+            echo "job: DATA-561"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'lzoyv9fmgc5c'
+  DATA-561:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  Chorus228:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Meanwhile review the org chart
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; touch ${TMPDIR:-/tmp}/pit7.dat && mv -v ${TMPDIR:-/tmp}/pit7.dat "${TMPDIR:-/tmp}/fon42024-03.old"; true ; } > /tmp/a5/audit-5129f.log
+            echo "job: verify-nightly-release-candidate"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'audit-5129f.log'
+  verify-nightly-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/audit-5129f.log 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  q4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Hail mary gc
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls -S -n -p --quote-name --block-size=M /dev; true ; } > /tmp/a5/bog
+            echo "job: v5-preview"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'bog'
+  v5-preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  HE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: remember to export the chapter markers
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; cut -d: -f1 /etc/passwd | sort | uniq -ic | tr a-z A-Z; true ; } > /tmp/a5/14.06.2020
+            echo "job: rocket"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - '14.06.2020'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/14.06.2020 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  idx_add:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Hand thanks to hr
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 3 -type f -name '*.d' -exec echo found: {} \; 2> /dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /tmp/a5/sha_284d610cf539689
+            echo "job: py310-release"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'sha_284d610cf539689'
+  py310-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/sha_284d610cf539689 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  alicetron:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Playtest The Cutscene In Cluster B
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; printf '%s' "feed the cat"; echo; true ; } > /tmp/a5/97s8p59s5
+            echo "job: sanity"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - '97s8p59s5'
+  sanity:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  VISIBLE_RECORD_88:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Centrifuge control group x2
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,lemon,18,22.27\n2,fig,8,70.15\n3,kiwi,11,91.23\n4,grape,20,18.13\n' >'/tmp/fo3.txt' && cut -d, -f2 '/tmp/fo3.txt'; true ; } > /tmp/a5/2Q31YZdXYbeu3eq
+            echo "job: jess-ci"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - '2Q31YZdXYbeu3eq'
+  jess-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  v20:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Oslo Office Scale Out
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 3 -type l -name \* -size +100k -mtime -365 -links +1 -exec ls -ld {} + 2>/dev/null | tail -10; true ; } > /tmp/a5/surgEENGiNEtENsoR
+            echo "job: preview-v3"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'surgEENGiNEtENsoR'
+  preview-v3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  model-dialog-semaphore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Pre Ping Check
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls -oc $HOME | sort -rk5 | head -3; true ; } > /tmp/a5/uCN5mSWL
+            echo "job: mar25-ship"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'uCN5mSWL'
+  mar25-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/uCN5mSWL 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  Psi_grad:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Bench the feature store
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; printf 'host=cache-a\nport=7424\nuser=erin\ndebug=false\n' | awk -F= '{print $1}'; true ; } > /tmp/a5/IMG-00005591
+            echo "job: orion-beta"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'IMG-00005591'
+  orion-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/IMG-00005591 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  Prev-Src-Pending:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Embed the holdout set right before release
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls -l /usr/bin | awk '{print $5}' | sort -nu | awk '{printf "%05d\n", $1}'; true ; } > /tmp/a5/TICKET-80856-HK
+            echo "job: java17-bench"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'TICKET-80856-HK'
+  java17-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  union_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: 800 exporting fog volumes
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 2 -empty -exec ls -1d {} + 2>/dev/null | xargs ls -ld; true ; } > /tmp/a5/sliceDriverSavanna
+            echo "job: STAGE_DEV"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'sliceDriverSavanna'
+  STAGE_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  kernelType:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: trainCurrencyFieldsTask
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; ls -s -h /lib | wc -w; true ; } > /tmp/a5/7dnvv0jfhwy
+            echo "job: wip-router-reload"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - '7dnvv0jfhwy'
+  wip-router-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/7dnvv0jfhwy 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+  p6788:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Percussive maintenance on the join keys
+          command: |
+            mkdir -p /tmp/a5
+            { set +o pipefail 2>/dev/null; grep -qs 'root' /etc/group && echo good || echo bad; true ; } > /tmp/a5/molten749
+            echo "job: blast-off"
+      - persist_to_workspace:
+          root: /tmp/a5
+          paths:
+            - 'molten749'
+  blast-off:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a5
+      - run:
+          name: Fetch 5
+          command: |
+            # chained
+            wc -c /tmp/a5/surgEENGiNEtENsoR 2>/dev/null | tee /dev/null | awk '{print}'
+      - run:
+          name: Retrieve repository
+          command: git clone --depth 2 -q --no-single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat tray-qa.tar | tar xf -
+      - run:
+          command: "$PWD/init-server"
+
+workflows:
+  ci:
+    jobs:
+      - kernelType
+      - ctrlrow
+      - psi_pred
+      - wip-router-reload:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - artifacts:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - DATA-561:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - phoenix:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - pr:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - fx-new:
+          requires:
+            - kernelType
+            - ctrlrow
+            - psi_pred
+      - v20
+      - nextOpt
+      - preview-v3:
+          requires:
+            - v20
+            - nextOpt
+      - build-end-to-end-artifact-bundle:
+          requires:
+            - v20
+            - nextOpt
+      - STAGE_DEV:
+          requires:
+            - v20
+            - nextOpt
+      - v5-rc:
+          requires:
+            - v20
+            - nextOpt
+      - Deploy_Staging3:
+          requires:
+            - v20
+            - nextOpt
+      - hyperion-plus:
+          requires:
+            - v20
+            - nextOpt
+      - blast-off:
+          requires:
+            - v20
+            - nextOpt
+      - ValidatePipeline:
+          requires:
+            - v20
+            - nextOpt
+      - jess-ci:
+          requires:
+            - v20
+            - nextOpt
+      - validate-production-regression-suite:
+          requires:
+            - v20
+            - nextOpt
+      - java17-bench:
+          requires:
+            - v20
+            - nextOpt
+      - v5-preview:
+          requires:
+            - v20
+            - nextOpt
+      - succes-only:
+          requires:
+            - v20
+            - nextOpt
+      - bob-push:
+          requires:
+            - v20
+            - nextOpt
+      - sanity:
+          requires:
+            - v20
+            - nextOpt
+      - BaseRatioVisitor
+      - hotel-4:
+          requires:
+            - BaseRatioVisitor
+      - idx_add:
+          requires:
+            - BaseRatioVisitor
+      - py310-release:
+          requires:
+            - idx_add
+      - Psi_grad:
+          requires:
+            - idx_add
+      - orion-beta:
+          requires:
+            - Psi_grad
+      - model-dialog-semaphore:
+          requires:
+            - Psi_grad
+      - mar25-ship:
+          requires:
+            - model-dialog-semaphore
+      - HE:
+          requires:
+            - model-dialog-semaphore
+      - rocket:
+          requires:
+            - HE
+      - fOpen:
+          requires:
+            - HE
+      - UAT_HOOK_7:
+          requires:
+            - fOpen
+      - accentOrchid:
+          requires:
+            - fOpen
+      - andromeda-v2:
+          requires:
+            - accentOrchid
+      - Chorus228:
+          requires:
+            - accentOrchid
+      - verify-nightly-release-candidate:
+          requires:
+            - Chorus228
+      - kate_x:
+          requires:
+            - Chorus228
+      - run-end-to-end-regression-suite:
+          requires:
+            - kate_x
